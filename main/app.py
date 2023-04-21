@@ -31,14 +31,18 @@ def index():
 @app.route('/login', methods=["GET","POST"])
 def login():
     if request.method=="POST":
-        c = sql.connect("data/main.db")
-        cur = c.cursor()
-        _user = request.form.get("username")
-        a = cur.execute("SELECT pass FROM users WHERE user = ?", [_user])
-        print(a.fetchall())
         #TODO ENCRYPT DATA AND REBOOT DATABASE
         if m_login_state == 0:
-            accountstatus(1)
+            c = sql.connect("data/main.db")
+            cur = c.cursor()
+            _user = request.form.get("username")
+            a = cur.execute("SELECT pass FROM users WHERE user = ?", [_user])
+            if request.form.get("password") == a.fetchone()[0]:
+                print("Logging user into account")
+                accountstatus(1)
+            else:
+                print("Incorrect Pass")
+                return render_template('login.html', login = loginstate[m_login_state])
         return render_template('index.html', login = loginstate[m_login_state])
     else:
         if m_login_state == 1:
