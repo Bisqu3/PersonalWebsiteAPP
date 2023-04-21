@@ -2,12 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Untitled</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Nicholas Nielsen</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/logo.css') }}">
 </head>
 <body>
     <header>
-        <h1 class="img_logo">logo</h1>
+        <nav>
+            <ul class="navbar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/projects">Projects</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/login">{{login}}</a></li>
+            </ul>
+        </nav>
+        <canvas id="sawWaveCanvas" height="250"></canvas>
     </header>
     <main>
         {% block content %}
@@ -16,5 +25,6 @@
     <footer>
         <!-- Add your footer content here -->
     </footer>
+    <script src="{{url_for('static', filename='sawWave.js')}}"></script>
 </body>
 </html>
