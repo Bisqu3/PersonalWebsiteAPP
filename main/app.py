@@ -1,6 +1,7 @@
 #Dependencies
 from flask import Flask, render_template, request, session, redirect, flash
 import sqlite3 as sql
+import user
 
 #For testing
 
@@ -10,6 +11,8 @@ app = Flask(__name__)
 loginstate = ["Login", "Logout"]
 m_login_state = 0
 username = ""
+#Assign user priviliges
+priv_user = 0
 
 def accountstatus(status):
     global m_login_state
@@ -30,6 +33,7 @@ def index():
 
 @app.route('/login', methods=["GET","POST"])
 def login():
+    global username
     if request.method=="POST":
         #TODO ENCRYPT DATA AND REBOOT DATABASE
         if m_login_state == 0:
@@ -37,16 +41,23 @@ def login():
             cur = c.cursor()
             _user = request.form.get("username")
             a = cur.execute("SELECT pass FROM users WHERE user = ?", [_user])
-            if request.form.get("password") == a.fetchone()[0]:
-                print("Logging user into account")
+            b = a.fetchone()
+            if b is None:
+                print("No User found")
+                return render_template('login.html', login = loginstate[m_login_state], status = "Incorrect User or Pass")
+            if request.form.get("password") == b[0]:
+                print("Logging "+_user+" into account")
                 accountstatus(1)
+                username = _user
             else:
                 print("Incorrect Pass")
-                return render_template('login.html', login = loginstate[m_login_state])
+                return render_template('login.html', login = loginstate[m_login_state], status = "Incorrect User or Pass")
         return render_template('index.html', login = loginstate[m_login_state])
     else:
         if m_login_state == 1:
             accountstatus(0)
+            print(username+" Logged Out")
+            username = ""
         return render_template('login.html', login = loginstate[m_login_state])
 
 @app.route('/projects', methods=["GET","POST"])
