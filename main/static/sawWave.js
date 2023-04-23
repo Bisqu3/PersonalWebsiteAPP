@@ -24,7 +24,7 @@ function drawBackground() {
 }
 
 function getRandomNoise() {
-  return Math.random() * 12 - 8; // Generates a random number
+  return Math.random() * 16 - 10; // Generates a random number
 }
 
 function drawWaveWithNoise(color, alpha, startX) {

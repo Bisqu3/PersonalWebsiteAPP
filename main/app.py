@@ -14,6 +14,10 @@ username = ""
 #Assign user priviliges
 priv_user = 0
 
+
+#test file holding
+_projects = ["functiongeneratorsynth","frequencyanalyzer","equalizervisualizer"]
+
 def accountstatus(status):
     global m_login_state
     m_login_state = status
@@ -62,7 +66,16 @@ def login():
 
 @app.route('/projects', methods=["GET","POST"])
 def projects():
-    return render_template('projects.html', login = loginstate[m_login_state])
+    return render_template('projects.html', login = loginstate[m_login_state], projects = _projects)
+@app.route('/proj/frequencyanalyzer')
+def freqana():
+    return render_template('/proj/frequencyanalyzer.html')
+@app.route('/proj/equalizervisualizer')
+def eqvis():
+    return render_template('/proj/equalizervisualizer.html')
+@app.route('/proj/functiongeneratorsynth')
+def funcsynth():
+    return render_template('/proj/functiongen.html')
 
 @app.route('/about', methods=["GET","POST"])
 def about():

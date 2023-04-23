@@ -1,0 +1,69 @@
+/* Function generator */
+.function-generator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.function-generator__column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.function-generator__label {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.function-generator__knob {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #2e2e2e;
+  background-image: linear-gradient(to bottom, #7b7b7b 0%, #444444 100%);
+  box-shadow: inset 0px 2px 0px rgba(255, 255, 255, 0.2),
+              inset 0px -2px 0px rgba(0, 0, 0, 0.2),
+              0px 3px 3px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.function-generator__knob:hover {
+  box-shadow: inset 0px 2px 0px rgba(255, 255, 255, 0.5),
+              inset 0px -2px 0px rgba(0, 0, 0, 0.5),
+              0px 4px 4px rgba(0, 0, 0, 0.8);
+}
+
+.function-generator__knob:focus {
+  outline: none;
+  box-shadow: inset 0px 2px 0px rgba(255, 255, 255, 0.8),
+              inset 0px -2px 0px rgba(0, 0, 0, 0.8),
+              0px 6px 6px rgba(0, 0, 0, 1);
+}
+
+.function-generator__value {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #c8c8c8;
+}
+
+/* Canvas */
+#canvas {
+  width: 100%;
+  height: 100vh;
+  filter: sepia(40%) brightness(90%) saturate(120%) hue-rotate(-10deg);
+}
+
+/* Body */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+  background-color: #222;
+  color: #c8c8c8;
+}

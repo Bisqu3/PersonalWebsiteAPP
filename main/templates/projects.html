@@ -2,4 +2,9 @@
 
 {% block content %}
 <p>TODO projects page</p>
+<ul class="navbar">
+{% for list in projects %}
+    <a class="projectlist" href="/proj/{{list}}">{{list}}</a>
+{% endfor %}
+</ul>
 {% endblock %}

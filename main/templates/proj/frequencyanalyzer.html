@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Frequency Analyzer</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: black;
+		}
+
+		canvas {
+			position: absolute;
+			top: 0;
+			left: 0;
+			z-index: -1;
+		}
+
+		#reactivity-slider {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			width: 200px;
+		}
+
+		#equalizer {
+			position: absolute;
+			bottom: 20px;
+			left: 20px;
+			width: 400px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+			color: white;
+			font-size: 14px;
+			font-family: sans-serif;
+		}
+
+		.equalizer-slider {
+			width: 60px;
+			height: 10px;
+			border-radius: 5px;
+			background-color: #555;
+			-webkit-appearance: none;
+			outline: none;
+			opacity: 0.7;
+			-webkit-transition: .2s;
+			transition: opacity .2s;
+		}
+
+		.equalizer-slider:hover {
+			opacity: 1;
+		}
+
+		.equalizer-slider::-webkit-slider-thumb {
+			-webkit-appearance: none;
+			appearance: none;
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background-color: #fff;
+			cursor: pointer;
+		}
+
+		.equalizer-slider::-moz-range-thumb {
+			width: 20px;
+			height: 20px;
+			border: none;
+			border-radius: 50%;
+			background-color: #fff;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="oscilloscope"></canvas>
+	<canvas id="final-canvas"></canvas>
+
+	<input type="range" id="reactivity-slider" min="-100" max="1000" step="1" value="0" />
+
+	<div id="equalizer">
+    <!-- Add this inside the div id="equalizer" -->
+    <label>Latency</label>
+    <input class="equalizer-slider" type="range" min="0" max="1000" value="0" id="latency-slider" />
+		<label>60Hz</label>
+		<input class="equalizer-slider" type="range" min="-20" max="20" value="0" id="eq-slider-0" />
+		<label>170Hz</label>
+		<input class="equalizer-slider" type="range" min="-20" max="20" value="0" id="eq-slider-1" />
+		<label>350Hz</label>
+		<input class="equalizer-slider" type="range" min="-20" max="20" value="0" id="eq-slider-2" />
+		<label>1000Hz</label>
+		<input class="equalizer-slider" type="range" min="-20" max="20" value="0" id="eq-slider-3" />
+		<label>2000Hz</label>
+		<input class="equalizer-slider" type="range" min="-20" max="20" value="0" id="eq-slider-4" />
+		<label>4000Hz</label>
+		<input class="equalizer-slider" type="range" min="-20" max="20" value="0" id="eq-slider-5" />
+		<label>8000Hz</label>
+		<input class="equalizer-slider" type="range" min="-20" max="20" value="0" id="eq-slider-6" />
+	</div>
+
+	<script src="{{url_for('static', filename='freqana.js')}}"></script>
+</body>
+</html>
