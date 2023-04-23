@@ -23,26 +23,37 @@ function drawBackground() {
   ctx.fillRect(blackBackgroundWidth, 0, width - blackBackgroundWidth, height);
 }
 
-function drawWaveOnBlack(color, alpha) {
+function getRandomNoise() {
+  return Math.random() * 12 - 8; // Generates a random number
+}
+
+function drawWaveWithNoise(color, alpha, startX) {
   ctx.beginPath();
-  for (let x = -waveWidth + offsetX; x < blackBackgroundWidth*2; x += waveWidth) {
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x + waveWidth, waveHeight);
-    ctx.lineTo(x + waveWidth, 0);
+  
+  for (let x = startX; x <= startX + waveWidth; x += 1) {
+    let y = ((x - startX) / waveWidth) * waveHeight;
+
+    y += getRandomNoise();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x + 1, y - waveHeight + getRandomNoise());
   }
+
   ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
+  ctx.lineWidth = 2; // Increase the line width for better visibility
   ctx.stroke();
+  ctx.lineWidth = 1; 
+}
+
+function drawWaveOnBlack(color, alpha) {
+  for (let x = -waveWidth + offsetX; x < blackBackgroundWidth * 2; x += waveWidth) {
+    drawWaveWithNoise(color, alpha, x);
+  }
 }
 
 function drawWaveOnWhite(color, alpha) {
-  ctx.beginPath();
   for (let x = -waveWidth + offsetX + blackBackgroundWidth; x < width; x += waveWidth) {
-    ctx.moveTo(x, 0);
-    ctx.lineTo(x + waveWidth, waveHeight);
-    ctx.lineTo(x + waveWidth, 0);
+    drawWaveWithNoise(color, alpha, x);
   }
-  ctx.strokeStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${alpha})`;
-  ctx.stroke();
 }
 
 function updateOffset() {
@@ -51,9 +62,9 @@ function updateOffset() {
   const rightBound = center + deadzone / 2;
 
   if (mousePosX < leftBound) {
-    offsetX += (leftBound - mousePosX) / 99.9-1;
+    offsetX += (leftBound - mousePosX) / 500;
   } else if (mousePosX > rightBound) {
-    offsetX -= (mousePosX - rightBound) / 99.9-1;
+    offsetX -= (mousePosX - rightBound) / 500;
   }
 
   if (offsetX <= -waveWidth) {
@@ -63,23 +74,25 @@ function updateOffset() {
   }
 }
 
+
 function drawSawWave() {
   ctx.clearRect(0, 0, width, height);
   drawBackground();
 
-  drawWaveOnBlack({ r: 212, g: 199, b: 180 }, 0.5); // Light beige from the CSS
-  drawWaveOnWhite({ r: 59, g: 56, b: 52 }, 1); // Dark brown from the CSS
+  drawWaveOnBlack({ r: 212, g: 199, b: 180 }, 0.5); // Light beige
+  drawWaveOnWhite({ r: 59, g: 56, b: 52 }, 1); // Dark brown
 
   ctx.save();
   ctx.beginPath();
-  ctx.rect((width - waveWidth) / 2, (height - waveHeight) / 2, waveWidth, waveHeight);
+  ctx.rect(0, 0, blackBackgroundWidth, height);
   ctx.clip();
 
-  drawWaveOnBlack({ r: 255, g: 255, b: 255 }, 1);
+  drawWaveOnBlack({ r: 212, g: 199, b: 180 }, 1); // Light Beige
   ctx.restore();
 
   updateOffset();
 }
+
 
 function animate() {
   drawSawWave();

@@ -128,3 +128,23 @@ main {
   background-color: #a39480;
 }
 
+#rule30-canvas {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -2; /* Move canvas below the content */
+}
+
+.class-container {
+  position: relative;
+  z-index: 1; /* Make sure the content is above the canvas */
+  width: calc(100% - 200px); /* Adjust the width to show canvas on the sides */
+  margin: 0 auto;
+  background-color: #3b3834; /* Set the background color */
+  min-height: 100vh;
+  box-sizing: border-box; /* Add box-sizing to include padding in the width calculation */
+  padding: 20px;
+}
+
+

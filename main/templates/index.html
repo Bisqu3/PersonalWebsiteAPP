@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div id="landing-container">
-        <h1 id="welcome-title">Welcome</h1>
-        <p id="welcome-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
-        <a id="explore-btn" href="{{ url_for('projects') }}">Explore My Projects</a>
+    <div class="content-wrapper"> <!-- Add this wrapper div -->
+        <div id="landing-container">
+            <h1 id="welcome-title">Welcome</h1>
+            <p id="welcome-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet.</p>
+            <a id="explore-btn" href="{{ url_for('projects') }}">Explore My Projects</a>
+        </div>
     </div>
 {% endblock %}
