@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+    <div class="content">
+        <div class="main-content">
+            <h1>Contact Us</h1>
+            <p>
+                Have questions or feedback? We'd love to hear from you.
+            </p>
+            <address>
+                <strong>BOXSquid</strong><br>
+                <br>
+                Seattle, WA<br>
+                contact@boxsquid.net<br>
+            </address>
+            <div class="social-links">
+                <a href="https://www.tiktok.com/en/" class="social-link"><img src="{{url_for('static', filename='tik-tok.png')}}" alt="TikTok" /></a>
+                <a href="https://twitter.com" class="social-link"><img src="{{url_for('static', filename='twitter.png')}}" alt="Twitter" /></a>
+                <a href="https://www.reddit.com/" class="social-link"><img src="{{url_for('static', filename='reddit.png')}}" alt="Reddit" /></a>
+                <a href="https://github.com/" class="social-link"><img src="{{url_for('static', filename='github.png')}}" alt="Github" /></a>
+                <a href="https://discord.com/" class="social-link"><img src="{{url_for('static', filename='discord.png')}}" alt="Discord" /></a>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}    

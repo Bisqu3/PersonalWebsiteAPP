@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+
+    <div class="content">
+        <div class="main-content">
+            <h1>Sentiment Analysis</h1>
+            <p>
+                Use our sentiment analysis tool to gather insights from social media. Select a social media site, enter a keyword, and specify the number of entries you want to analyze (max 200).
+            </p>
+            
+            <form action="/sentiment-analysis" method="post">
+                <label for="socialMedia">Select Social Media Site:</label>
+                <select id="socialMedia" name="socialMedia" required>
+                    <option value="4chan" {% if socialMedia == '4chan' %}selected{% endif %}>4chan</option>
+                    <option value="reddit" {% if socialMedia == 'reddit' %}selected{% endif %}>Reddit</option>
+                    <option value="tumblr" {% if socialMedia == 'tumblr' %}selected{% endif %}>Tumblr</option>
+                    <option value="twitter" {% if socialMedia == 'twitter' %}selected{% endif %}>Twitter</option>
+                </select>
+
+                <label for="forum">Enter Subreddit or Board Name:</label>
+                <input type="text" value="{{forum}}" id="forum" name="forum" autocomplete="off" placeholder="No r/ or //" required>
+
+                <label for="keyword">Enter Keyword:</label>
+                <input type="text" value="{{keyword}}" id="keyword" name="keyword" autocomplete="off" placeholder="No #" required>
+
+                <label for="numEntries">Number of Entries (max 200):</label>
+                <input type="number" value="{{numEntries}}" id="numEntries" name="numEntries" autocomplete="off" min="1" max="200" required>
+
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+
+            <button id="back-to-top" onclick="scrollToTop()">Back to Top</button>
+
+            {% if s_average %}
+                {% if not entries.empty %}
+                    <h1 class="average">Average Sentiment: {{ s_average }} Positive Mentions: {{pmentions}} Negative Mentions: {{nmentions}} Neutral/Errors: {{nementions}}</h1>
+                    {% if graph %}
+                        <h2>From {{ firstlast[1] }} To {{firstlast[0]}} </h2>
+                        <header></header>
+                        <div id="plot">
+                            {{ graph | safe }}
+                        </div>
+                    {% endif %}
+                    {{ entries.to_html(classes='data-table', escape=False, index=False) | safe }}
+                {% else %}
+                    <p class="no-entries">No entries found.</p>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        $(document).ready( function () {
+            $('.data-table').DataTable();
+        } );
+    </script>
+
+    <script>
+        // Function to check if the user has scrolled down a set distance
+        window.onscroll = function() {
+          scrollFunction();
+        };
+      
+        function scrollFunction() {
+          var button = document.getElementById("back-to-top");
+      
+          // You can adjust this value based on when you want the button to appear
+          if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            button.style.display = "block";
+          } else {
+            button.style.display = "none";
+          }
+        }
+      
+        // Function to scroll to the top when the button is clicked
+        function scrollToTop() {
+          document.body.scrollTop = 0; // For Safari
+          document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE, and Opera
+        }
+    </script>
+</body>
+{% endblock %}

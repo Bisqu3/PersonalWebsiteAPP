@@ -1,0 +1,5 @@
+flask
+clean-text*
+nltk
+    nltk.download('vader-lexicon')  nltk.download('punkt')
+praw

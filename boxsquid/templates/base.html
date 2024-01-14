@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BOXSquid</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/App.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="logo"></div>
+        <a class="logo" href="/">BOXSquid</a>
+        <div class="nav">
+            <div class="dropdown">
+                <button class="nav-btn">Utilities</button>
+                <div class="dropdown-content">
+                    <div class="sub-category">
+                        <p>Social Media Tools</p>
+                        <a href="/sentiment-analysis">Sentiment Analysis</a>
+                        <a href="/profile-harvester">Profile Harvester</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="nav-btn">Datasets</button>
+                <div class="dropdown-content">
+                    <div class="sub-category">
+                        <p>Social Media Datasets</p>
+                        <a href="#">Trending Across Social Media</a>
+                        <a href="#">Trade Influencers Analysis</a>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="nav-btn">More</button>
+                <div class="dropdown-content">
+                    <a href="/about">About</a>
+                    <a href="/contact">Contact Us</a>
+                    <a href="/tutorial">Tutorial</a>
+                </div>
+            </div>
+            <a href="/login" class="nav-btn">Sign In</a>
+        </div>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+    <footer class="footer">
+        <div class="social-links">
+            <a href="https://www.tiktok.com/en/" class="social-link"><img src="{{url_for('static', filename='tik-tok.png')}}" alt="TikTok" /></a>
+            <a href="https://twitter.com" class="social-link"><img src="{{url_for('static', filename='twitter.png')}}" alt="Twitter" /></a>
+            <a href="https://www.reddit.com/" class="social-link"><img src="{{url_for('static', filename='reddit.png')}}" alt="Reddit" /></a>
+            <a href="https://github.com/" class="social-link"><img src="{{url_for('static', filename='github.png')}}" alt="Github" /></a>
+            <a href="https://discord.com/" class="social-link"><img src="{{url_for('static', filename='discord.png')}}" alt="Discord" /></a>
+        </div>
+        <p>&copy; 2024 BOXSquid. All rights reserved.</p>
+    </footer>
+</body>
+</html>

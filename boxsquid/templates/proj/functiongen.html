@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>3FuncSynth</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/funcstyle.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Digital 3 Function Waveform Synth</h1>
+
+      <canvas id="canvas"></canvas>
+
+      <div class="function-controller">
+    <label for="waveform1">Function 1 - Waveform:</label>
+    <select id="waveform1" name="waveform1">
+        <option value="sine">Sine</option>
+        <option value="square">Square</option>
+        <option value="saw">Saw</option>
+    </select>
+    <label for="amplitude1">Amplitude:</label>
+    <input type="range" id="amplitude1" name="amplitude1" min="0" max="100" value="0" />
+    <label for="frequency1">Frequency:</label>
+    <input type="range" id="frequency1" name="frequency1" min="1" max="2000" value="0" />
+    <label for="phase1">Phase:</label>
+    <input type="range" id="phase1" name="phase1" min="0" max="360" value="0" />
+</div>
+
+<div class="function-controller">
+    <label for="waveform2">Function 2 - Waveform:</label>
+    <select id="waveform2" name="waveform2">
+        <option value="sine">Sine</option>
+        <option value="square">Square</option>
+        <option value="saw">Saw</option>
+    </select>
+    <label for="amplitude2">Amplitude:</label>
+    <input type="range" id="amplitude2" name="amplitude2" min="0" max="100" value="0" />
+    <label for="frequency2">Frequency:</label>
+    <input type="range" id="frequency2" name="frequency2" min="1" max="2000" value="0" />
+    <label for="phase2">Phase:</label>
+    <input type="range" id="phase2" name="phase2" min="0" max="360" value="0" />
+</div>
+
+<div class="function-controller">
+    <label for="waveform3">Function 3 - Waveform:</label>
+    <select id="waveform3" name="waveform3">
+        <option value="sine">Sine</option>
+        <option value="square">Square</option>
+        <option value="saw">Saw</option>
+    </select>
+    <label for="amplitude3">Amplitude:</label>
+    <input type="range" id="amplitude3" name="amplitude3" min="0" max="100" value="0" />
+    <label for="frequency3">Frequency:</label>
+    <input type="range" id="frequency3" name="frequency3" min="1" max="2000" value="0" />
+    <label for="phase3">Phase:</label>
+    <input type="range" id="phase3" name="phase3" min="0" max="360" value="0" />
+</div>
+
+    </div>
+
+    <script src="{{url_for('static', filename='functionGenerator.js')}}"></script>
+  </body>
+</html>
